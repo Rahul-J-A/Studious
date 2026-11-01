@@ -1,0 +1,35 @@
+{
+  "name": "studious",
+  "version": "1.0.0",
+  "description": "Studious — Smart Study Hub with video lectures, playlists, music player, and built-in browser for research.",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder"
+  },
+  "build": {
+    "appId": "com.studious.app",
+    "productName": "Studious",
+    "win": {
+      "target": "nsis",
+      "icon": "icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "index.html",
+      "browser.html",
+      "login.html",
+      "package.json"
+    ],
+    "extraResources": []
+  },
+  "devDependencies": {
+    "electron": "^30.0.0",
+    "electron-builder": "^24.13.3"
+  }
+}

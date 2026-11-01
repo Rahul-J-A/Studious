@@ -1,0 +1,395 @@
+{
+  "pl_15cb4b36bc949731": {
+    "name": "LAVRAVEL ECOM PLAYLIST",
+    "created": 1783341613604,
+    "modified": 1783342443563,
+    "thumbnail": null,
+    "videos": [
+      "a00987ebd740d860d00942aaa42a0d5c"
+    ],
+    "source": "manual",
+    "sourceUrl": null,
+    "downloadQueue": [
+      {
+        "url": "https://www.youtube.com/playlist?list=PLm8sgxwSZofewgO7ntRS5gODprEpSDPQ4",
+        "title": "#25 How to Show Total Number of Product Added to the Cart for a User in Laravel",
+        "order": 0,
+        "status": "done",
+        "addedAt": 1783341613605,
+        "vaultId": "a00987ebd740d860d00942aaa42a0d5c"
+      }
+    ]
+  },
+  "pl_86654be6a98d5b92": {
+    "name": "MERN STACK",
+    "created": 1783341968594,
+    "modified": 1783341968594,
+    "thumbnail": null,
+    "videos": [],
+    "source": "manual",
+    "sourceUrl": null,
+    "downloadQueue": [
+      {
+        "url": "https://www.youtube.com/playlist?list=PLbtI3_MArDOk_A-GnYHPOiHSxlK2Vd3Zn",
+        "title": "Detecting...",
+        "order": 0,
+        "status": "queued",
+        "addedAt": 1783341968595
+      }
+    ]
+  },
+  "pl_738bf03ca14b297d": {
+    "name": "(NEW) MERN Stack Full Course | Complete Full Stack Developer Roadmap\ud83d\ude80",
+    "created": 1783381695631,
+    "modified": 1783383535097,
+    "thumbnail": null,
+    "videos": [
+      "7388a07660c16a54617940dda520a193",
+      "40c9cdecf88be32bac23e9899d719ae5",
+      "799fd83caded93e321a103f5342ec82a",
+      "5838341365ab90e53673f92a273f88a2"
+    ],
+    "source": "download",
+    "sourceUrl": "https://www.youtube.com/watch?v=a-wVHL0lpb0&list=PLbtI3_MArDOk_A-GnYHPOiHSxlK2Vd3Zn&index=4",
+    "downloadQueue": [
+      {
+        "url": "https://www.youtube.com/watch?v=kkOuRJ69BRY",
+        "title": "Learn HTML, CSS and JavaScript in Single Video | Basics of MERN Stack Development",
+        "duration": 13998,
+        "order": 0,
+        "status": "queued",
+        "addedAt": 1783381695631
+      },
+      {
+        "url": "https://www.youtube.com/watch?v=J_r6hBo9lO4",
+        "title": "Responsive Web Development Complete Course for Beginners | Tutorial + Full Project",
+        "duration": 12125,
+        "order": 1,
+        "status": "queued",
+        "addedAt": 1783381695631
+      },
+      {
+        "url": "https://www.youtube.com/watch?v=a-wVHL0lpb0",
+        "title": "Redux Toolkit Complete Course 2026 \uff5c Beginner to Advanced with Project.temp",
+        "duration": 29052,
+        "order": 2,
+        "status": "done",
+        "addedAt": 1783381695631,
+        "vaultId": "7388a07660c16a54617940dda520a193"
+      },
+      {
+        "url": "https://www.youtube.com/watch?v=1aR7tcmWo_w",
+        "title": "Part 3 \u2013 Advanced JavaScript, Projects & Real Developer Mindset \uff5c Full Course.f400",
+        "duration": 26781,
+        "order": 3,
+        "status": "done",
+        "addedAt": 1783381695631,
+        "vaultId": "40c9cdecf88be32bac23e9899d719ae5"
+      },
+      {
+        "url": "https://www.youtube.com/watch?v=wH6uf20dpAo",
+        "title": "Part 3 \u2013 Advanced JavaScript, Projects & Real Developer Mindset | Full Course",
+        "duration": 15337,
+        "order": 4,
+        "status": "queued",
+        "addedAt": 1783381695631
+      },
+      {
+        "url": "https://www.youtube.com/watch?v=GVdBPJzmwQg",
+        "title": "Part 4 \u2013 JavaScript for Placements | Get Ready for Your First Developer Job",
+        "duration": 9531,
+        "order": 5,
+        "status": "queued",
+        "addedAt": 1783381695631
+      },
+      {
+        "url": "https://www.youtube.com/watch?v=3LRZRSIh_KE",
+        "title": "ReactJS Full Course | ReactJS - Learn Everything | Sheryians Coding School",
+        "duration": 40554,
+        "order": 6,
+        "status": "queued",
+        "addedAt": 1783381695631
+      },
+      {
+        "url": "https://www.youtube.com/watch?v=Q5TqsetwCoE",
+        "title": "Learn HTML, CSS and JavaScript in Single Video \uff5c Basics of MERN Stack Development.f308",
+        "duration": 17514,
+        "order": 7,
+        "status": "done",
+        "addedAt": 1783381695631,
+        "vaultId": "799fd83caded93e321a103f5342ec82a"
+      },
+      {
+        "url": "https://www.youtube.com/watch?v=lVzb6pmel_E",
+        "title": "TypeScript Domination - Full Course",
+        "duration": 14264,
+        "order": 8,
+        "status": "error",
+        "addedAt": 1783381695631
+      },
+      {
+        "url": "https://www.youtube.com/watch?v=0IciwnJ6PJI",
+        "title": "Complete Backend One Shot | Beginners to Advanced  | Learn Node.js, Express, MongoDB from Scratch",
+        "duration": 30210,
+        "order": 9,
+        "status": "queued",
+        "addedAt": 1783381695631
+      },
+      {
+        "url": "https://www.youtube.com/watch?v=NQOAQP0mow0",
+        "title": "Advanced Backend Project | Learn Bank Transaction System with Node.js, Express & MongoDB",
+        "duration": 14662,
+        "order": 10,
+        "status": "queued",
+        "addedAt": 1783381695631
+      },
+      {
+        "url": "https://www.youtube.com/watch?v=pkKn8q5AvsY",
+        "title": "TypeScript Domination - Full Course.temp",
+        "duration": 9797,
+        "order": 11,
+        "status": "done",
+        "addedAt": 1783381695631,
+        "vaultId": "5838341365ab90e53673f92a273f88a2"
+      },
+      {
+        "url": "https://www.youtube.com/watch?v=zG3hNL08Dro",
+        "title": "Gen AI + Full Stack Web Development Project | React, Node, JWT, Gemini",
+        "duration": 21365,
+        "order": 12,
+        "status": "queued",
+        "addedAt": 1783381695631
+      }
+    ]
+  },
+  "pl_3120ae3d2f9ab07e": {
+    "name": "(NEW) MERN Stack Full Course | Complete Full Stack Developer Roadmap\ud83d\ude80",
+    "created": 1783475609558,
+    "modified": 1783475609558,
+    "thumbnail": null,
+    "videos": [],
+    "source": "download",
+    "sourceUrl": "https://www.youtube.com/watch?v=3LRZRSIh_KE&list=PLbtI3_MArDOk_A-GnYHPOiHSxlK2Vd3Zn&index=8",
+    "downloadQueue": [
+      {
+        "url": "https://www.youtube.com/watch?v=kkOuRJ69BRY",
+        "title": "Learn HTML, CSS and JavaScript in Single Video | Basics of MERN Stack Development",
+        "duration": 13998,
+        "order": 0,
+        "status": "queued",
+        "addedAt": 1783475609558
+      },
+      {
+        "url": "https://www.youtube.com/watch?v=J_r6hBo9lO4",
+        "title": "Responsive Web Development Complete Course for Beginners | Tutorial + Full Project",
+        "duration": 12125,
+        "order": 1,
+        "status": "queued",
+        "addedAt": 1783475609558
+      },
+      {
+        "url": "https://www.youtube.com/watch?v=a-wVHL0lpb0",
+        "title": "JavaScript Full Course | JavaScript - Learn Everything | Sheryians Coding School",
+        "duration": 29052,
+        "order": 2,
+        "status": "queued",
+        "addedAt": 1783475609558
+      },
+      {
+        "url": "https://www.youtube.com/watch?v=1aR7tcmWo_w",
+        "title": "Part 2 \u2013 Master JavaScript & Become a Real Developer | Full Course",
+        "duration": 26781,
+        "order": 3,
+        "status": "queued",
+        "addedAt": 1783475609558
+      },
+      {
+        "url": "https://www.youtube.com/watch?v=wH6uf20dpAo",
+        "title": "Part 3 \u2013 Advanced JavaScript, Projects & Real Developer Mindset | Full Course",
+        "duration": 15337,
+        "order": 4,
+        "status": "queued",
+        "addedAt": 1783475609558
+      },
+      {
+        "url": "https://www.youtube.com/watch?v=GVdBPJzmwQg",
+        "title": "Part 4 \u2013 JavaScript for Placements | Get Ready for Your First Developer Job",
+        "duration": 9531,
+        "order": 5,
+        "status": "queued",
+        "addedAt": 1783475609558
+      },
+      {
+        "url": "https://www.youtube.com/watch?v=3LRZRSIh_KE",
+        "title": "ReactJS Full Course | ReactJS - Learn Everything | Sheryians Coding School",
+        "duration": 40554,
+        "order": 6,
+        "status": "error",
+        "addedAt": 1783475609558
+      },
+      {
+        "url": "https://www.youtube.com/watch?v=Q5TqsetwCoE",
+        "title": "Redux Toolkit Complete Course 2026 | Beginner to Advanced with Project",
+        "duration": 17514,
+        "order": 7,
+        "status": "queued",
+        "addedAt": 1783475609558
+      },
+      {
+        "url": "https://www.youtube.com/watch?v=lVzb6pmel_E",
+        "title": "TypeScript Domination - Full Course",
+        "duration": 14264,
+        "order": 8,
+        "status": "queued",
+        "addedAt": 1783475609558
+      },
+      {
+        "url": "https://www.youtube.com/watch?v=0IciwnJ6PJI",
+        "title": "Complete Backend One Shot | Beginners to Advanced  | Learn Node.js, Express, MongoDB from Scratch",
+        "duration": 30210,
+        "order": 9,
+        "status": "queued",
+        "addedAt": 1783475609558
+      },
+      {
+        "url": "https://www.youtube.com/watch?v=NQOAQP0mow0",
+        "title": "Advanced Backend Project | Learn Bank Transaction System with Node.js, Express & MongoDB",
+        "duration": 14662,
+        "order": 10,
+        "status": "queued",
+        "addedAt": 1783475609558
+      },
+      {
+        "url": "https://www.youtube.com/watch?v=pkKn8q5AvsY",
+        "title": "Complete Authentication System | JWT, Refresh Token, OTP, Logout All Devices",
+        "duration": 9797,
+        "order": 11,
+        "status": "queued",
+        "addedAt": 1783475609558
+      },
+      {
+        "url": "https://www.youtube.com/watch?v=zG3hNL08Dro",
+        "title": "Gen AI + Full Stack Web Development Project | React, Node, JWT, Gemini",
+        "duration": 21365,
+        "order": 12,
+        "status": "queued",
+        "addedAt": 1783475609558
+      }
+    ]
+  },
+  "pl_230520a20521c98f": {
+    "name": "(NEW) MERN Stack Full Course | Complete Full Stack Developer Roadmap\ud83d\ude80",
+    "created": 1783476053689,
+    "modified": 1783476053689,
+    "thumbnail": null,
+    "videos": [],
+    "source": "download",
+    "sourceUrl": "https://www.youtube.com/watch?v=3LRZRSIh_KE&list=PLbtI3_MArDOk_A-GnYHPOiHSxlK2Vd3Zn&index=7",
+    "downloadQueue": [
+      {
+        "url": "https://www.youtube.com/watch?v=kkOuRJ69BRY",
+        "title": "Learn HTML, CSS and JavaScript in Single Video | Basics of MERN Stack Development",
+        "duration": 13998,
+        "order": 0,
+        "status": "queued",
+        "addedAt": 1783476053689
+      },
+      {
+        "url": "https://www.youtube.com/watch?v=J_r6hBo9lO4",
+        "title": "Responsive Web Development Complete Course for Beginners | Tutorial + Full Project",
+        "duration": 12125,
+        "order": 1,
+        "status": "queued",
+        "addedAt": 1783476053689
+      },
+      {
+        "url": "https://www.youtube.com/watch?v=a-wVHL0lpb0",
+        "title": "JavaScript Full Course | JavaScript - Learn Everything | Sheryians Coding School",
+        "duration": 29052,
+        "order": 2,
+        "status": "queued",
+        "addedAt": 1783476053689
+      },
+      {
+        "url": "https://www.youtube.com/watch?v=1aR7tcmWo_w",
+        "title": "Part 2 \u2013 Master JavaScript & Become a Real Developer | Full Course",
+        "duration": 26781,
+        "order": 3,
+        "status": "queued",
+        "addedAt": 1783476053689
+      },
+      {
+        "url": "https://www.youtube.com/watch?v=wH6uf20dpAo",
+        "title": "Part 3 \u2013 Advanced JavaScript, Projects & Real Developer Mindset | Full Course",
+        "duration": 15337,
+        "order": 4,
+        "status": "queued",
+        "addedAt": 1783476053689
+      },
+      {
+        "url": "https://www.youtube.com/watch?v=GVdBPJzmwQg",
+        "title": "Part 4 \u2013 JavaScript for Placements | Get Ready for Your First Developer Job",
+        "duration": 9531,
+        "order": 5,
+        "status": "queued",
+        "addedAt": 1783476053689
+      },
+      {
+        "url": "https://www.youtube.com/watch?v=3LRZRSIh_KE",
+        "title": "ReactJS Full Course | ReactJS - Learn Everything | Sheryians Coding School",
+        "duration": 40554,
+        "order": 6,
+        "status": "queued",
+        "addedAt": 1783476053689
+      },
+      {
+        "url": "https://www.youtube.com/watch?v=Q5TqsetwCoE",
+        "title": "Redux Toolkit Complete Course 2026 | Beginner to Advanced with Project",
+        "duration": 17514,
+        "order": 7,
+        "status": "queued",
+        "addedAt": 1783476053689
+      },
+      {
+        "url": "https://www.youtube.com/watch?v=lVzb6pmel_E",
+        "title": "TypeScript Domination - Full Course",
+        "duration": 14264,
+        "order": 8,
+        "status": "queued",
+        "addedAt": 1783476053689
+      },
+      {
+        "url": "https://www.youtube.com/watch?v=0IciwnJ6PJI",
+        "title": "Complete Backend One Shot | Beginners to Advanced  | Learn Node.js, Express, MongoDB from Scratch",
+        "duration": 30210,
+        "order": 9,
+        "status": "queued",
+        "addedAt": 1783476053689
+      },
+      {
+        "url": "https://www.youtube.com/watch?v=NQOAQP0mow0",
+        "title": "Advanced Backend Project | Learn Bank Transaction System with Node.js, Express & MongoDB",
+        "duration": 14662,
+        "order": 10,
+        "status": "queued",
+        "addedAt": 1783476053689
+      },
+      {
+        "url": "https://www.youtube.com/watch?v=pkKn8q5AvsY",
+        "title": "Complete Authentication System | JWT, Refresh Token, OTP, Logout All Devices",
+        "duration": 9797,
+        "order": 11,
+        "status": "queued",
+        "addedAt": 1783476053689
+      },
+      {
+        "url": "https://www.youtube.com/watch?v=zG3hNL08Dro",
+        "title": "Gen AI + Full Stack Web Development Project | React, Node, JWT, Gemini",
+        "duration": 21365,
+        "order": 12,
+        "status": "queued",
+        "addedAt": 1783476053689
+      }
+    ]
+  }
+}

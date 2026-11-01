@@ -1,0 +1,1130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Studious — Access</title>
+<script>
+
+function toggleAppTheme() {
+  if (document.documentElement.classList.contains('dark-theme')) {
+    document.documentElement.classList.remove('dark-theme');
+    document.body.classList.remove('dark-theme');
+    localStorage.setItem('theme', 'light');
+  } else {
+    document.documentElement.classList.add('dark-theme');
+    document.body.classList.add('dark-theme');
+    localStorage.setItem('theme', 'dark');
+  }
+}
+
+window.addEventListener('storage', (e) => {
+  if (e.key === 'theme') {
+    if (e.newValue === 'dark') {
+      document.documentElement.classList.add('dark-theme');
+      document.body.classList.add('dark-theme');
+    } else {
+      document.documentElement.classList.remove('dark-theme');
+      document.body.classList.remove('dark-theme');
+    }
+  }
+});
+
+// Run theme update on startup
+if (localStorage.getItem('theme') === 'dark') {
+  document.addEventListener('DOMContentLoaded', () => {
+    document.body.classList.add('dark-theme');
+  });
+}
+
+  if (localStorage.getItem('theme') === 'dark') {
+    document.documentElement.classList.add('dark-theme');
+  }
+</script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;700&display=swap');
+
+:root {
+.dark-theme .card {
+  background: rgba(18, 13, 32, 0.95) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), 0 30px 70px rgba(0, 0, 0, 0.6) !important;
+}
+.dark-theme #titlebar {
+  background: rgba(11, 7, 19, 0.9) !important;
+  border-bottom: 1px solid rgba(144, 97, 249, 0.15) !important;
+}
+.dark-theme .tb-btn:hover {
+  background: rgba(144, 97, 249, 0.1) !important;
+}
+.dark-theme input {
+  background: var(--surface3) !important;
+  color: var(--text) !important;
+  border-color: var(--border) !important;
+}
+.dark-theme input:focus {
+  border-color: var(--accent) !important;
+  background: var(--surface2) !important;
+}
+.dark-theme select {
+  background: var(--surface3) !important;
+  color: var(--text) !important;
+  border-color: var(--border) !important;
+}
+.dark-theme .stat-card {
+  background: var(--surface) !important;
+  border-color: var(--border) !important;
+}
+
+html.dark-theme, body.dark-theme, .dark-theme {
+  --bg:      #0b0713;
+  --surface: #120d20;
+  --surface2:#19122c;
+  --surface3:#221a3a;
+  --border:  #312356;
+  --accent:  #9061f9;
+  --accent2: #7c3aed;
+  --accent3: #c084fc;
+  --glow:    rgba(144, 97, 249, 0.08);
+  --glowStr: rgba(144, 97, 249, 0.25);
+  --text:    #f3f0fa;
+  --muted:   #a39bb8;
+}
+
+
+  --bg:      #f5f0ff;
+  --surface: #ffffff;
+  --surface2:#faf8ff;
+  --surface3:#f1ebfc;
+  --border:  #dcd3f5;
+  --accent:  #7c3aed;
+  --accent3: #a855f7;
+  --text:    #2e1065;
+  --muted:   #7c729c;
+  --error:   #dc2626;
+  --success: #16a34a;
+  --gold:    #b45309;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; overflow: hidden; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  display: flex; align-items: center; justify-content: center;
+  padding-top: 32px;
+}
+
+/* ── soft dots background ── */
+body::after {
+  content: '';
+  position: fixed; inset: 0;
+  background-image: radial-gradient(rgba(124, 58, 237, 0.08) 1.5px, transparent 1.5px);
+  background-size: 24px 24px;
+  pointer-events: none; z-index: 0;
+}
+
+/* ── glow orbs ── */
+.orb {
+  position: fixed;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(168, 85, 247, 0.12) 0%, transparent 70%);
+  top: 50%; left: 50%; transform: translate(-50%,-50%);
+  animation: orbPulse 8s ease-in-out infinite;
+  pointer-events: none; z-index: 0;
+}
+@keyframes orbPulse {
+  0%,100%{opacity:1;transform:translate(-50%,-50%) scale(1)}
+  50%{opacity:0.6;transform:translate(-50%,-50%) scale(1.15)}
+}
+
+.orb-tl, .orb-br {
+  position: fixed; width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(124, 58, 237, 0.1) 0%, transparent 70%);
+  pointer-events: none; z-index: 0;
+}
+.orb-tl { top: -150px; left: -150px; }
+.orb-br { bottom: -150px; right: -150px; }
+
+/* ── TITLEBAR ── */
+#titlebar {
+  display: flex; align-items: center; justify-content: space-between;
+  height: 32px; background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(124, 58, 237, 0.12);
+  position: fixed; top: 0; left: 0; right: 0; z-index: 9999;
+  -webkit-app-region: drag; user-select: none; padding: 0 0 0 14px;
+}
+.tb-logo {
+  font-family: 'Space Grotesk', sans-serif; font-size: 13px;
+  font-weight: 700; letter-spacing: 1px; color: var(--accent);
+}
+.tb-logo span { color: var(--accent3); }
+.tb-controls { display: flex; -webkit-app-region: no-drag; height: 32px; }
+.tb-btn {
+  width: 46px; height: 32px; background: none; border: none;
+  color: var(--muted); font-size: 13px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center; transition: all 0.15s;
+}
+.tb-btn:hover { background: rgba(124, 58, 237, 0.08); color: var(--accent); }
+.tb-btn.close:hover { background: rgba(220, 38, 38, 0.1); color: var(--error); }
+
+/* ── CARD ── */
+.card {
+  position: relative; z-index: 1;
+  width: 420px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  box-shadow:
+    0 10px 30px rgba(124, 58, 237, 0.06),
+    0 30px 70px rgba(46, 16, 101, 0.1);
+  animation: cardIn 0.6s cubic-bezier(0.16,1,0.3,1) both;
+  overflow: hidden;
+}
+@keyframes cardIn {
+  from{opacity:0;transform:translateY(30px) scale(0.97)}
+  to{opacity:1;transform:translateY(0) scale(1)}
+}
+
+.card-inner { padding: 40px 38px 32px; }
+
+/* ── LOGO ── */
+.logo { text-align: center; margin-bottom: 32px; }
+.logo-text {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 34px; font-weight: 700; letter-spacing: -0.5px;
+}
+.logo-text .sin  { color: var(--accent); }
+.logo-text .city { color: var(--text); }
+.logo-text .x    { color: var(--accent3); }
+.logo-sub {
+  font-size: 11px; letter-spacing: 3px; color: var(--muted);
+  text-transform: uppercase; margin-top: 6px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 500;
+}
+
+/* ── NOTICE ── */
+.session-notice {
+  background: rgba(220, 38, 38, 0.06);
+  border: 1px solid rgba(220, 38, 38, 0.15);
+  border-left: 3px solid var(--error);
+  padding: 10px 14px; margin-bottom: 20px;
+  font-size: 12px;
+  color: var(--error);
+  border-radius: 8px;
+  animation: fadeIn 0.4s ease;
+}
+
+/* ── TABS ── */
+.tabs {
+  display: flex; margin-bottom: 26px;
+  border-bottom: 1px solid var(--border);
+}
+.tab-btn {
+  flex: 1; background: none; border: none;
+  color: var(--muted); padding: 12px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 13px; font-weight: 600; letter-spacing: 0.5px;
+  cursor: pointer;
+  border-bottom: 2px solid transparent; margin-bottom: -1px;
+  transition: all 0.2s;
+}
+.tab-btn:hover { color: var(--text); }
+.tab-btn.active {
+  color: var(--accent); border-bottom-color: var(--accent);
+}
+
+/* ── FORMS ── */
+.form { display: none; flex-direction: column; gap: 16px; }
+.form.active { display: flex; animation: fadeIn 0.25s ease; }
+@keyframes fadeIn { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:translateY(0)} }
+
+.field { display: flex; flex-direction: column; gap: 6px; }
+.field label {
+  font-size: 11px; font-weight: 600; letter-spacing: 0.5px;
+  color: var(--muted);
+  font-family: 'Space Grotesk', sans-serif;
+}
+.field input {
+  background: var(--surface2); border: 1px solid var(--border);
+  color: var(--text); padding: 12px 16px;
+  font-family: inherit; font-size: 15px; font-weight: 500;
+  outline: none;
+  border-radius: 10px;
+  transition: all 0.2s;
+}
+.field input:focus {
+  border-color: var(--accent);
+  background: var(--surface);
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.12);
+}
+.field input::placeholder { color: #aaa5c0; }
+
+/* ── SUBMIT ── */
+.submit-btn {
+  margin-top: 8px;
+  background: linear-gradient(135deg, var(--accent), var(--accent3));
+  color: #ffffff; border: none; padding: 14px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 14px; font-weight: 600; letter-spacing: 0.5px;
+  cursor: pointer;
+  border-radius: 10px;
+  transition: all 0.2s; position: relative; overflow: hidden;
+  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.2);
+}
+.submit-btn::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transform: translateX(-100%); transition: transform 0.4s;
+}
+.submit-btn:hover {
+  box-shadow: 0 6px 20px rgba(124, 58, 237, 0.35);
+  transform: translateY(-1px);
+}
+.submit-btn:hover::before { transform: translateX(100%); }
+.submit-btn:active { transform: translateY(0); }
+
+/* ── MESSAGES ── */
+.msg {
+  font-size: 13px; padding: 10px 14px;
+  font-weight: 500; display: none;
+  border-radius: 8px;
+}
+.msg.error   { background: rgba(220, 38, 38, 0.08);  border-left: 3px solid var(--error);  color: var(--error);   display: block; }
+.msg.success { background: rgba(22, 163, 74, 0.08); border-left: 3px solid var(--success); color: var(--success); display: block; }
+
+/* ── STRENGTH BAR ── */
+.strength-bar { height: 3px; background: var(--surface3); margin-top: 5px; border-radius: 2px; overflow: hidden; }
+.strength-fill { height: 100%; width: 0%; transition: width 0.3s, background 0.3s; }
+
+/* ── FOOTER ── */
+.card-footer {
+  border-top: 1px solid var(--border);
+  padding: 14px 38px; text-align: center;
+  font-size: 11px; letter-spacing: 1px;
+  color: var(--muted); font-family: 'Space Grotesk', sans-serif;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.card-footer .footer-brand span { color: var(--accent); }
+.card-footer .footer-lock {
+  font-size: 10px; color: rgba(124, 58, 237, 0.6); font-weight: 600;
+}
+
+/* ── ADMIN TABS ── */
+.admin-tabs {
+  display:flex; gap:8px; margin-bottom:20px;
+  border-bottom:1px solid var(--border); padding-bottom:0;
+}
+.adm-tab {
+  font-family:'Space Grotesk',sans-serif; font-size:12px; font-weight:600;
+  padding:10px 18px; cursor:pointer;
+  background:transparent; border:none;
+  border-bottom:2px solid transparent; color:var(--muted);
+  transition:all 0.2s;
+}
+.adm-tab:hover { color:var(--accent); }
+.adm-tab.active { color:var(--accent); border-bottom-color:var(--accent); }
+
+/* ── CHANGE PASSWORD PANEL ── */
+.changepw-wrap {
+  max-width:420px; margin:16px 0;
+  background:var(--surface); border:1px solid var(--border);
+  padding:24px; border-radius: 12px;
+}
+.changepw-field { margin-bottom:14px; }
+.changepw-field label {
+  display:block; font-family:'Space Grotesk',sans-serif; font-size:11px;
+  font-weight:600; color:var(--muted); margin-bottom:6px;
+}
+.changepw-field input,
+.changepw-field select {
+  width:100%; background:var(--surface2); border:1px solid var(--border);
+  color:var(--text); padding:10px 14px; font-family:inherit;
+  font-size:14px; outline:none; transition:all 0.2s; border-radius: 8px;
+}
+.changepw-field select option { background:var(--surface); }
+.changepw-field input:focus,
+.changepw-field select:focus { border-color:var(--accent); background: var(--surface); }
+.cpw-msg { font-size:13px; margin-bottom:12px; padding:8px 12px; display:none; border-radius: 6px; }
+.cpw-msg.ok  { display:block; background:rgba(22, 163, 74, 0.08); color:var(--success); border-left:3px solid var(--success); }
+.cpw-msg.err { display:block; background:rgba(220, 38, 38, 0.08); color:var(--error); border-left:3px solid var(--error); }
+.cpw-btn {
+  font-family:'Space Grotesk',sans-serif; font-size:12px; font-weight:600;
+  padding:12px 20px; cursor:pointer;
+  background:var(--accent); border:none;
+  color:#ffffff; transition:all 0.2s; width:100%; border-radius: 8px;
+}
+.cpw-btn:hover { background:var(--accent3); box-shadow:0 4px 12px rgba(124, 58, 237, 0.2); }
+
+/* ── VIDEO LIST ── */
+.vid-item {
+  display:flex; align-items:center; gap:14px;
+  padding:12px; border-bottom:1px solid var(--border);
+  transition:background 0.12s;
+}
+.vid-item:hover { background:var(--surface2); }
+.vid-thumb {
+  width:88px; height:50px; object-fit:cover; flex-shrink:0;
+  background:#000; border-radius: 6px;
+}
+.vid-thumb-placeholder {
+  width:88px; height:50px; flex-shrink:0; background:var(--surface3);
+  border-radius: 6px; display:flex; align-items:center;
+  justify-content:center; color:var(--accent); font-size:18px;
+}
+.vid-info { flex:1; min-width:0; }
+.vid-title {
+  font-size:13px; font-weight:600; color:var(--text);
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
+.vid-meta { font-size:11px; color:var(--muted); margin-top:3px; }
+.vid-del-btn {
+  font-family:'Space Grotesk',sans-serif; font-size:11px; font-weight:600;
+  padding:6px 14px; cursor:pointer; flex-shrink:0;
+  background:rgba(220, 38, 38, 0.08); border:none;
+  color:var(--error); transition:all 0.15s; border-radius: 6px;
+}
+.vid-del-btn:hover { background:var(--error); color:#ffffff; }
+.vid-del-btn:disabled { opacity:0.3; cursor:not-allowed; }
+
+.msg.warn { background:rgba(217, 119, 6, 0.08); border-left:3px solid var(--gold); color:var(--gold); display:block; }
+
+/* ── PENDING NOTICE ── */
+.pending-notice {
+  background:rgba(217, 119, 6, 0.08); border:1px solid rgba(217, 119, 6, 0.15);
+  border-left:3px solid var(--gold); padding:14px 16px;
+  font-size:13px; line-height:1.6; color:var(--gold); border-radius: 8px;
+}
+.pending-notice strong {
+  font-family:'Space Grotesk',sans-serif; font-size:12px;
+  display:block; margin-bottom:4px;
+}
+
+/* ── ADMIN OVERLAY ── */
+#adminOverlay {
+  display:none; position:fixed; inset:0; z-index:8000;
+  background:var(--bg); overflow-y:auto; padding:48px 0 32px;
+  animation:fadeIn 0.3s ease;
+}
+.admin-wrap { max-width:860px; margin:0 auto; padding:0 24px; }
+.admin-header {
+  display:flex; align-items:center; justify-content:space-between;
+  margin-bottom:28px; padding-bottom:16px;
+  border-bottom:1px solid var(--border);
+}
+.admin-title {
+  font-family:'Space Grotesk',sans-serif; font-size:18px; font-weight:700;
+  color:var(--text);
+}
+.admin-title span { color:var(--accent); }
+.admin-badge {
+  background:rgba(124, 58, 237, 0.08); border:1px solid rgba(124, 58, 237, 0.2);
+  color:var(--accent); font-family:'Space Grotesk',sans-serif; font-size:11px;
+  font-weight:600; padding:4px 12px; border-radius: 6px;
+}
+.admin-enter-btn {
+  background:var(--accent); border:none;
+  color:#ffffff; font-family:'Space Grotesk',sans-serif; font-size:12px;
+  font-weight:600; padding:8px 16px; cursor:pointer;
+  transition:all 0.2s; border-radius: 8px;
+}
+.admin-enter-btn:hover { background:var(--accent3); box-shadow:0 4px 12px rgba(124, 58, 237, 0.2); }
+.admin-stats {
+  display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-bottom:28px;
+}
+.stat-card {
+  background:var(--surface); border:1px solid var(--border); padding:18px 20px;
+  border-radius: 12px;
+}
+.stat-label {
+  font-family:'Space Grotesk',sans-serif; font-size:11px;
+  color:var(--muted); margin-bottom:6px; font-weight:500;
+}
+.stat-val { font-family:'Space Grotesk',sans-serif; font-size:28px; font-weight:700; color:var(--accent); }
+.stat-val.gold { color:var(--gold); }
+.stat-val.warn { color:var(--gold); }
+.section-hdr { margin-bottom:12px; }
+.section-title {
+  font-family:'Space Grotesk',sans-serif; font-size:13px; font-weight:600;
+  color:var(--accent);
+}
+.section-title.pt { color:var(--gold); }
+.user-table { width:100%; border-collapse:collapse; margin-bottom:28px; }
+.user-table th {
+  font-family:'Space Grotesk',sans-serif; font-size:11px; font-weight:600;
+  color:var(--muted); text-align:left;
+  padding:10px 14px; border-bottom:1px solid var(--border); background:rgba(124, 58, 237, 0.04);
+}
+.user-table td {
+  padding:12px 14px; font-size:13px; font-weight:500;
+  border-bottom:1px solid var(--border); vertical-align:middle;
+}
+.user-table tr:hover td { background:var(--surface2); }
+.u-name {
+  font-family:'Space Grotesk',sans-serif; font-size:13px; font-weight:600;
+  color:var(--text);
+}
+.u-name.is-admin { color:var(--accent); }
+.role-badge {
+  font-family:'Space Grotesk',sans-serif; font-size:10px; font-weight:600;
+  padding:3px 10px; display:inline-block; border-radius: 4px;
+}
+.role-badge.admin   { background:rgba(124, 58, 237, 0.08); border:1px solid rgba(124, 58, 237, 0.3); color:var(--accent); }
+.role-badge.allowed { background:rgba(22, 163, 74, 0.08); border:1px solid rgba(22, 163, 74, 0.2); color:var(--success); }
+.role-badge.pending { background:rgba(217, 119, 6, 0.08); border:1px solid rgba(217, 119, 6, 0.2); color:var(--gold); }
+.role-badge.denied  { background:rgba(220, 38, 38, 0.08); border:1px solid rgba(220, 38, 38, 0.2); color:var(--error); }
+.arow { display:flex; gap:6px; flex-wrap:wrap; }
+.act-btn {
+  font-family:inherit; font-size:12px; font-weight:600;
+  padding:5px 12px; cursor:pointer;
+  border:1px solid var(--border); background:transparent; color:var(--muted);
+  transition:all 0.15s; border-radius: 6px;
+}
+.act-btn.ok  { border-color:rgba(22, 163, 74, 0.3); color:var(--success); }
+.act-btn.ok:hover  { background:rgba(22, 163, 74, 0.08); border-color:var(--success); }
+.act-btn.bad { border-color:rgba(220, 38, 38, 0.3); color:var(--error); }
+.act-btn.bad:hover { background:rgba(220, 38, 38, 0.08); border-color:var(--error); }
+.act-btn.rev { border-color:rgba(217, 119, 6, 0.3);  color:var(--gold); }
+.act-btn.rev:hover { background:rgba(217, 119, 6, 0.08); border-color:var(--gold); }
+.act-btn.del { border-color:rgba(220, 38, 38, 0.15); color:rgba(220, 38, 38, 0.6); }
+.act-btn.del:hover { background:rgba(220, 38, 38, 0.08); border-color:var(--error); color:var(--error); }
+.empty-row td {
+  text-align:center; color:var(--muted); font-family:'Space Grotesk',sans-serif;
+  font-size:12px; padding:24px;
+}
+.admin-toast {
+  position:fixed; bottom:24px; left:50%; transform:translateX(-50%);
+  background:var(--accent); color:#ffffff; font-family:'Space Grotesk',sans-serif;
+  font-size:12px; font-weight:600; padding:10px 22px;
+  z-index:99999; border-radius: 8px;
+  pointer-events:none; box-shadow: 0 4px 12px rgba(124, 58, 237, 0.25);
+}
+::-webkit-scrollbar{width:6px;}
+::-webkit-scrollbar-track{background:transparent;}
+::-webkit-scrollbar-thumb{background:var(--border); border-radius: 3px;}
+</style>
+</head>
+<body>
+
+<div id="titlebar">
+  <div class="tb-logo"><span>S</span>tudious</div>
+  <div class="tb-controls">
+    <button class="tb-btn" id="themeToggleBtn" onclick="toggleAppTheme()" style="margin-right: 8px;" title="Toggle Theme">🌓</button>
+    <button class="tb-btn" onclick="window.electronAPI.winMinimize()">&#x2212;</button>
+    <button class="tb-btn" onclick="window.electronAPI.winMaximize()">&#x2750;</button>
+    <button class="tb-btn close" onclick="window.electronAPI.winClose()">&#x2715;</button>
+  </div>
+</div>
+
+
+<!-- ══ ADMIN DASHBOARD OVERLAY ══ -->
+<div id="adminOverlay">
+  <div class="admin-wrap">
+
+    <div class="admin-header">
+      <div>
+        <div class="admin-title"><span>S</span>tudious &mdash; Admin Dashboard</div>
+        <div style="font-size:12px;color:var(--muted);margin-top:4px;">
+          Signed in as <span style="color:var(--accent);font-weight:700;">LUHARPRO</span>
+        </div>
+      </div>
+      <div style="display:flex;gap:10px;align-items:center;">
+        <div class="admin-badge">ADMINISTRATOR</div>
+        <button class="admin-enter-btn" onclick="window.electronAPI.goHome()">ENTER APP</button>
+      </div>
+    </div>
+
+    <div class="admin-stats">
+      <div class="stat-card">
+        <div class="stat-label">Total Users</div>
+        <div class="stat-val gold" id="statTotal">0</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Approved</div>
+        <div class="stat-val" id="statApproved">0</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Pending Approval</div>
+        <div class="stat-val warn" id="statPending">0</div>
+      </div>
+    </div>
+
+    <!-- ── ADMIN TABS ── -->
+    <div class="admin-tabs">
+      <button class="adm-tab active" onclick="switchAdminTab('users',this)">&#x2B21; Users</button>
+      <button class="adm-tab" onclick="switchAdminTab('changepw',this)">&#x270E; Change Password</button>
+      <button class="adm-tab" onclick="switchAdminTab('videos',this)">&#x1F5D1; Delete Videos</button>
+    </div>
+
+    <!-- ── TAB: USERS ── -->
+    <div class="adm-panel" id="panel-users">
+      <div class="section-hdr">
+        <div class="section-title pt">&#x26A0; Pending Approval</div>
+      </div>
+      <table class="user-table">
+        <thead><tr><th>Username</th><th>Status</th><th>Registered</th><th>Actions</th></tr></thead>
+        <tbody id="pendingBody">
+          <tr class="empty-row"><td colspan="4">No pending users</td></tr>
+        </tbody>
+      </table>
+
+      <div class="section-hdr" style="margin-top:20px;">
+        <div class="section-title">&#x2B21; All Users</div>
+      </div>
+      <table class="user-table">
+        <thead><tr><th>Username</th><th>Role</th><th>Registered</th><th>Actions</th></tr></thead>
+        <tbody id="allUsersBody"></tbody>
+      </table>
+    </div>
+
+    <!-- ── TAB: CHANGE PASSWORD ── -->
+    <div class="adm-panel" id="panel-changepw" style="display:none;">
+      <div class="section-hdr">
+        <div class="section-title">&#x270E; Change User Password</div>
+      </div>
+      <div class="changepw-wrap">
+        <div class="changepw-field">
+          <label>Select User</label>
+          <select id="cpwUserSelect"></select>
+        </div>
+        <div class="changepw-field">
+          <label>New Password</label>
+          <input type="password" id="cpwNewPass" placeholder="Enter new password" autocomplete="off">
+        </div>
+        <div class="changepw-field">
+          <label>Confirm Password</label>
+          <input type="password" id="cpwConfirm" placeholder="Repeat new password" autocomplete="off">
+        </div>
+        <div id="cpwMsg" class="cpw-msg"></div>
+        <button class="cpw-btn" onclick="doChangePassword()">&#x270E; Update Password</button>
+      </div>
+    </div>
+
+    <!-- ── TAB: DELETE VIDEOS ── -->
+    <div class="adm-panel" id="panel-videos" style="display:none;">
+      <div class="section-hdr" style="display:flex;align-items:center;justify-content:space-between;">
+        <div class="section-title">&#x1F5D1; Vault Videos</div>
+        <button class="act-btn ok" onclick="loadVaultVideos()" style="font-size:11px;padding:4px 12px;">&#x21BA; Refresh</button>
+      </div>
+      <div id="videoListWrap">
+        <div class="empty-row" style="text-align:center;padding:32px;color:var(--muted);font-family:'Space Grotesk',sans-serif;font-size:9px;letter-spacing:2px;">
+          LOADING VAULT...
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="orb"></div>
+<div class="orb-tl"></div>
+<div class="orb-br"></div>
+
+<div class="card" id="mainCard">
+  <div class="card-inner">
+
+    <div class="logo">
+      <div class="logo-text"><span class="sin">S</span><span class="city">tudious</span></div>
+      <div class="logo-sub">Smart Study Portal</div>
+      <div style="margin-top:10px;display:inline-flex;align-items:center;gap:7px;background:rgba(124, 58, 237, 0.06);border:1px solid rgba(124, 58, 237, 0.25);padding:5px 14px;border-radius:6px;">
+        <span style="color:var(--accent);font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:700;letter-spacing:1px;">★ LUHAR</span>
+        <span style="color:rgba(124, 58, 237, 0.4);font-size:9px;">|</span>
+        <span style="color:rgba(124, 58, 237, 0.7);font-family:'Space Grotesk',sans-serif;font-size:10px;letter-spacing:1px;">ADMINISTRATOR</span>
+      </div>
+    </div>
+
+    <!-- shown if user was auto-logged out -->
+    <div class="session-notice" id="sessionNotice" style="display:none;">
+      ✦ Session Expired — Login Required
+    </div>
+
+    <div class="tabs">
+      <button class="tab-btn active" id="loginTabBtn"    onclick="switchTab('login')">Login</button>
+      <button class="tab-btn"        id="registerTabBtn" onclick="switchTab('register')">Register</button>
+    </div>
+
+    <!-- LOGIN -->
+    <form class="form active" id="loginForm" onsubmit="return false;">
+      <div id="loginMsg" class="msg"></div>
+      <div class="field">
+        <label>Username</label>
+        <input type="text" id="loginUser" placeholder="Enter username" autocomplete="off">
+      </div>
+      <div class="field">
+        <label>Password</label>
+        <input type="password" id="loginPass" placeholder="Enter password" autocomplete="off">
+      </div>
+      <button class="submit-btn" onclick="doLogin()">✦ Access Hub</button>
+    </form>
+
+    <!-- REGISTER -->
+    <form class="form" id="registerForm" onsubmit="return false;">
+      <div id="registerMsg" class="msg"></div>
+      <div class="field">
+        <label>Username</label>
+        <input type="text" id="regUser" placeholder="Choose username" autocomplete="off">
+      </div>
+      <div class="field">
+        <label>Password</label>
+        <input type="password" id="regPass" placeholder="Choose password" oninput="checkStrength(this.value)">
+        <div class="strength-bar"><div class="strength-fill" id="strengthFill"></div></div>
+      </div>
+      <div class="field">
+        <label>Confirm Password</label>
+        <input type="password" id="regConfirm" placeholder="Repeat password">
+      </div>
+      <button class="submit-btn" onclick="doRegister()">✦ Request Access</button>
+    </form>
+
+  </div>
+
+  <div class="card-footer">
+    <div class="footer-brand"><span>S</span>tudious</div>
+    <div style="font-family:'Space Grotesk',sans-serif;font-size:10px;letter-spacing:0.5px;color:rgba(124, 58, 237, 0.6);">★ LUHAR = ADMIN</div>
+    <div class="footer-lock">✦ SECURE</div>
+  </div>
+</div>
+
+<script>
+// ════════════════════════════════════════════════════
+//  Studious Auth System — Admin: LUHARPRO / luhar123
+//  Roles: admin | allowed | pending | denied
+// ════════════════════════════════════════════════════
+var ADMIN_USER = 'LUHARPRO';
+var ADMIN_PASS = 'luhar123';
+
+// Auto-logout on every page load — but skip if returning to dashboard
+(function() {
+  var gotoDash = localStorage.getItem('li_goto_dashboard');
+  if (gotoDash) {
+    // Coming from Dashboard button — keep session alive, show dashboard
+    localStorage.removeItem('li_goto_dashboard');
+    document.addEventListener('DOMContentLoaded', function() {
+      showAdminDashboard();
+    });
+    if (document.readyState !== 'loading') {
+      showAdminDashboard();
+    }
+  } else {
+    // Normal page load — clear session
+    var had = localStorage.getItem('li_session');
+    localStorage.removeItem('li_session');
+    localStorage.removeItem('li_role');
+    if (had) document.getElementById('sessionNotice').style.display = 'block';
+  }
+})();
+
+// Always ensure admin account exists and has correct role
+(function seedAdmin() {
+  var u = getUsers();
+  var rec = u[ADMIN_USER];
+  if (!rec || typeof rec !== 'object' || rec.role !== 'admin') {
+    u[ADMIN_USER] = {
+      pass: btoa(ADMIN_PASS),
+      role: 'admin',
+      registered: (rec && rec.registered) || Date.now()
+    };
+    saveUsers(u);
+  }
+})();
+
+function getUsers() {
+  try { return JSON.parse(localStorage.getItem('li_users') || '{}'); } catch(e) { return {}; }
+}
+function saveUsers(u) { localStorage.setItem('li_users', JSON.stringify(u)); }
+
+function grantSession(user, role) {
+  sessionStorage.setItem('li_session', user);
+  sessionStorage.setItem('li_role', role);
+  localStorage.setItem('li_session', user);
+  localStorage.setItem('li_role', role);
+}
+
+function switchTab(tab) {
+  document.getElementById('loginForm').classList.toggle('active', tab === 'login');
+  document.getElementById('registerForm').classList.toggle('active', tab === 'register');
+  document.getElementById('loginTabBtn').classList.toggle('active', tab === 'login');
+  document.getElementById('registerTabBtn').classList.toggle('active', tab === 'register');
+  ['loginMsg','registerMsg'].forEach(function(id) {
+    var e = document.getElementById(id); e.className = 'msg'; e.textContent = '';
+  });
+}
+
+function showMsg(id, text, type) {
+  var el = document.getElementById(id); el.textContent = text; el.className = 'msg ' + type;
+}
+
+function checkStrength(val) {
+  var fill = document.getElementById('strengthFill'), score = 0;
+  if (val.length >= 6) score++; if (val.length >= 10) score++;
+  if (/[A-Z]/.test(val)) score++; if (/[0-9]/.test(val)) score++;
+  if (/[^A-Za-z0-9]/.test(val)) score++;
+  fill.style.width = (score / 5 * 100) + '%';
+  fill.style.background = score <= 1 ? '#dc2626' : score <= 3 ? '#f39c12' : '#00ffcc';
+}
+
+function timeAgo(ts) {
+  if (!ts) return '—';
+  var s = Math.floor((Date.now() - ts) / 1000);
+  if (s < 60)    return s + 's ago';
+  if (s < 3600)  return Math.floor(s / 60)    + 'm ago';
+  if (s < 86400) return Math.floor(s / 3600)  + 'h ago';
+  return Math.floor(s / 86400) + 'd ago';
+}
+
+function adminToast(msg) {
+  var el = document.createElement('div');
+  el.className = 'admin-toast'; el.textContent = msg;
+  document.body.appendChild(el);
+  setTimeout(function() {
+    el.style.opacity = '0'; el.style.transition = 'opacity 0.3s';
+    setTimeout(function() { el.remove(); }, 300);
+  }, 2500);
+}
+
+// ── LOGIN ──
+function doLogin() {
+  var user = document.getElementById('loginUser').value.trim();
+  var pass = document.getElementById('loginPass').value;
+  if (!user || !pass) return showMsg('loginMsg', 'All fields required.', 'error');
+
+  var users = getUsers();
+  var record = users[user];
+  if (!record) return showMsg('loginMsg', 'Username not found.', 'error');
+
+  // Support old plain-string password format and new object format
+  var storedPass = (typeof record === 'string') ? record : record.pass;
+  if (storedPass !== btoa(pass)) return showMsg('loginMsg', 'Incorrect password.', 'error');
+
+  var role = (typeof record === 'object') ? record.role : 'allowed';
+
+  if (role === 'pending') return showMsg('loginMsg', 'Access pending - awaiting admin approval.', 'warn');
+  if (role === 'denied')  return showMsg('loginMsg', 'Access denied by administrator.', 'error');
+
+  if (role === 'admin') {
+    showMsg('loginMsg', 'Administrator - opening dashboard...', 'success');
+    grantSession(user, 'admin');
+    setTimeout(showAdminDashboard, 700);
+    return;
+  }
+
+  showMsg('loginMsg', 'Access granted - initializing...', 'success');
+  grantSession(user, 'allowed');
+  setTimeout(function() { window.electronAPI.goHome(); }, 900);
+}
+
+// ── REGISTER (creates pending account) ──
+function doRegister() {
+  var user    = document.getElementById('regUser').value.trim();
+  var pass    = document.getElementById('regPass').value;
+  var confirm = document.getElementById('regConfirm').value;
+
+  if (!user || !pass || !confirm) return showMsg('registerMsg', 'All fields required.', 'error');
+  if (user.length < 3)  return showMsg('registerMsg', 'Username min 3 characters.', 'error');
+  if (pass.length < 6)  return showMsg('registerMsg', 'Password min 6 characters.', 'error');
+  if (pass !== confirm) return showMsg('registerMsg', 'Passwords do not match.', 'error');
+  if (user.toUpperCase() === ADMIN_USER) return showMsg('registerMsg', 'That username is reserved.', 'error');
+
+  var users = getUsers();
+  if (users[user]) return showMsg('registerMsg', 'Username already taken.', 'error');
+
+  users[user] = { pass: btoa(pass), role: 'pending', registered: Date.now() };
+  saveUsers(users);
+
+  document.getElementById('registerForm').innerHTML =
+    '<div class="pending-notice">' +
+    '<strong>REQUEST SUBMITTED</strong>' +
+    'Account <strong style="color:var(--accent)">' + user + '</strong> created and awaiting approval.<br><br>' +
+    'Contact <span style="color:var(--gold)">LUHARPRO</span> to get your access approved.' +
+    '</div>';
+}
+
+// ── ADMIN DASHBOARD ──
+function showAdminDashboard() {
+  document.getElementById('mainCard').style.display = 'none';
+  document.getElementById('adminOverlay').style.display = 'block';
+  renderDashboard();
+}
+
+function renderDashboard() {
+  var users   = getUsers();
+  var entries = Object.entries(users);
+
+  function getRole(v) { return (typeof v === 'object') ? v.role : 'allowed'; }
+  function getReg(v)  { return (typeof v === 'object') ? v.registered : null; }
+
+  document.getElementById('statTotal').textContent    = entries.length;
+  document.getElementById('statApproved').textContent = entries.filter(function(e) { return getRole(e[1]) === 'allowed'; }).length;
+  document.getElementById('statPending').textContent  = entries.filter(function(e) { return getRole(e[1]) === 'pending'; }).length;
+
+  // ── Pending table ──
+  var pb = document.getElementById('pendingBody');
+  pb.innerHTML = '';
+  var pendingList = entries.filter(function(e) { return getRole(e[1]) === 'pending'; });
+  if (pendingList.length === 0) {
+    pb.innerHTML = '<tr class="empty-row"><td colspan="4">No pending users</td></tr>';
+  } else {
+    pendingList.forEach(function(entry) {
+      var uname = entry[0], data = entry[1];
+      var tr = document.createElement('tr');
+      tr.dataset.uname = uname;
+      var td1 = '<td><div class="u-name">' + uname + '</div></td>';
+      var td2 = '<td><span class="role-badge pending">PENDING</span></td>';
+      var td3 = '<td style="color:var(--muted);font-size:12px;">' + timeAgo(getReg(data)) + '</td>';
+      var td4 = '<td><div class="arow"><button class="act-btn ok" onclick="approveUser(this)">Approve</button><button class="act-btn bad" onclick="denyUser(this)">Deny</button></div></td>';
+      tr.innerHTML = td1 + td2 + td3 + td4;
+      pb.appendChild(tr);
+    });
+  }
+
+  // ── All users table ──
+  var ab = document.getElementById('allUsersBody');
+  ab.innerHTML = '';
+  entries.forEach(function(entry) {
+    var uname   = entry[0], data = entry[1];
+    var role    = getRole(data);
+    var isAdmin = (role === 'admin');
+    var tr = document.createElement('tr');
+    tr.dataset.uname = uname;
+    var td1 = '<td><div class="u-name' + (isAdmin ? ' is-admin' : '') + '">' + uname + '</div></td>';
+    var td2 = '<td><span class="role-badge ' + role + '">' + role.toUpperCase() + '</span></td>';
+    var td3 = '<td style="color:var(--muted);font-size:12px;">' + timeAgo(getReg(data)) + '</td>';
+    var td4;
+
+    if (isAdmin) {
+      td4 = '<td><span style="color:var(--muted);font-size:10px;font-family:\'Space Grotesk\',sans-serif;letter-spacing:1px;">PROTECTED</span></td>';
+    } else {
+      var b1 = (role === 'pending') ? '<button class="act-btn ok"  onclick="approveUser(this)">Approve</button>'    : '';
+      var b2 = (role === 'allowed') ? '<button class="act-btn rev" onclick="revokeUser(this)">Revoke</button>'       : '';
+      var b3 = (role === 'denied')  ? '<button class="act-btn ok"  onclick="approveUser(this)">Re-approve</button>' : '';
+      var b4 = (role !== 'denied')  ? '<button class="act-btn bad" onclick="denyUser(this)">Deny</button>'          : '';
+      var b5 = '<button class="act-btn del" onclick="deleteUser(this)">Delete</button>';
+      td4 = '<td><div class="arow">' + b1 + b2 + b3 + b4 + b5 + '</div></td>';
+    }
+
+    tr.innerHTML = td1 + td2 + td3 + td4;
+    ab.appendChild(tr);
+  });
+}
+
+// Read username from the row's data-uname attribute (set when row was built)
+function getUnameFromBtn(btn) {
+  return btn.closest('tr').dataset.uname;
+}
+
+function approveUser(btn) {
+  var uname = getUnameFromBtn(btn);
+  var u = getUsers(); if (!u[uname]) return;
+  if (typeof u[uname] === 'string') u[uname] = { pass: u[uname], role: 'allowed', registered: Date.now() };
+  else u[uname].role = 'allowed';
+  saveUsers(u); adminToast(uname + ' approved'); renderDashboard();
+}
+function denyUser(btn) {
+  var uname = getUnameFromBtn(btn);
+  var u = getUsers(); if (!u[uname] || uname === ADMIN_USER) return;
+  if (typeof u[uname] === 'string') u[uname] = { pass: u[uname], role: 'denied', registered: Date.now() };
+  else u[uname].role = 'denied';
+  saveUsers(u); adminToast(uname + ' denied'); renderDashboard();
+}
+function revokeUser(btn) {
+  var uname = getUnameFromBtn(btn);
+  var u = getUsers(); if (!u[uname] || uname === ADMIN_USER) return;
+  u[uname].role = 'denied';
+  saveUsers(u); adminToast(uname + ' revoked'); renderDashboard();
+}
+function deleteUser(btn) {
+  var uname = getUnameFromBtn(btn);
+  if (uname === ADMIN_USER) return adminToast('Cannot delete admin account');
+  var u = getUsers(); delete u[uname];
+  saveUsers(u); adminToast(uname + ' deleted'); renderDashboard();
+}
+
+// ── ADMIN TAB SWITCHING ──
+function switchAdminTab(tab, btn) {
+  document.querySelectorAll('.adm-tab').forEach(function(t) { t.classList.remove('active'); });
+  document.querySelectorAll('.adm-panel').forEach(function(p) { p.style.display = 'none'; });
+  btn.classList.add('active');
+  document.getElementById('panel-' + tab).style.display = 'block';
+  if (tab === 'changepw') populateChangePasswordDropdown();
+  if (tab === 'videos')   loadVaultVideos();
+}
+
+// ── CHANGE PASSWORD ──
+function populateChangePasswordDropdown() {
+  var sel = document.getElementById('cpwUserSelect');
+  var users = getUsers();
+  sel.innerHTML = '';
+  Object.keys(users).forEach(function(uname) {
+    var opt = document.createElement('option');
+    opt.value = uname;
+    opt.textContent = uname + (uname === ADMIN_USER ? ' (Admin)' : '');
+    sel.appendChild(opt);
+  });
+  document.getElementById('cpwMsg').className = 'cpw-msg';
+  document.getElementById('cpwNewPass').value = '';
+  document.getElementById('cpwConfirm').value = '';
+}
+
+function doChangePassword() {
+  var uname   = document.getElementById('cpwUserSelect').value;
+  var newPass = document.getElementById('cpwNewPass').value;
+  var confirm = document.getElementById('cpwConfirm').value;
+  var msg     = document.getElementById('cpwMsg');
+  msg.className = 'cpw-msg';
+
+  if (!newPass) { msg.className='cpw-msg err'; msg.textContent='Password cannot be empty.'; return; }
+  if (newPass.length < 6) { msg.className='cpw-msg err'; msg.textContent='Password must be at least 6 characters.'; return; }
+  if (newPass !== confirm) { msg.className='cpw-msg err'; msg.textContent='Passwords do not match.'; return; }
+
+  var u = getUsers();
+  if (!u[uname]) { msg.className='cpw-msg err'; msg.textContent='User not found.'; return; }
+  if (typeof u[uname] === 'string') u[uname] = { pass: btoa(newPass), role: 'allowed', registered: Date.now() };
+  else u[uname].pass = btoa(newPass);
+  saveUsers(u);
+
+  msg.className = 'cpw-msg ok';
+  msg.textContent = 'Password updated for ' + uname;
+  document.getElementById('cpwNewPass').value = '';
+  document.getElementById('cpwConfirm').value = '';
+  adminToast(uname + ' password changed');
+}
+
+// ── DELETE VIDEOS ──
+var vaultCache = [];
+
+async function loadVaultVideos() {
+  var wrap = document.getElementById('videoListWrap');
+  wrap.innerHTML = '<div style="text-align:center;padding:32px;color:var(--muted);font-family:\'Space Grotesk\',sans-serif;font-size:9px;letter-spacing:2px;">SCANNING VAULT...</div>';
+  try {
+    vaultCache = await window.electronAPI.vaultScan();
+    renderVaultList();
+  } catch(e) {
+    wrap.innerHTML = '<div style="text-align:center;padding:32px;color:#dc2626;font-family:\'Space Grotesk\',sans-serif;font-size:9px;letter-spacing:2px;">VAULT UNAVAILABLE</div>';
+  }
+}
+
+function fmtSize(b) {
+  if (!b) return '—';
+  if (b < 1024*1024*1024) return (b/1024/1024).toFixed(0) + ' MB';
+  return (b/1024/1024/1024).toFixed(2) + ' GB';
+}
+function fmtDur(s) {
+  s = Math.floor(s || 0);
+  return Math.floor(s/60) + ':' + (s%60).toString().padStart(2,'0');
+}
+
+function renderVaultList() {
+  var wrap = document.getElementById('videoListWrap');
+  wrap.innerHTML = '';
+  if (!vaultCache || !vaultCache.length) {
+    wrap.innerHTML = '<div style="text-align:center;padding:32px;color:var(--muted);font-family:\'Space Grotesk\',sans-serif;font-size:9px;letter-spacing:2px;">NO VIDEOS IN VAULT</div>';
+    return;
+  }
+  vaultCache.forEach(function(vid) {
+    var row = document.createElement('div');
+    row.className = 'vid-item';
+    row.dataset.vaultId = vid.vaultId;
+
+    var thumbHtml = '<div class="vid-thumb-placeholder">&#x25B6;</div>';
+
+    row.innerHTML = thumbHtml +
+      '<div class="vid-info">' +
+        '<div class="vid-title">' + (vid.title || vid.vaultId) + '</div>' +
+        '<div class="vid-meta">' + fmtSize(vid.size) + ' &nbsp;&#x22C5;&nbsp; ' + fmtDur(vid.duration) + (vid.optimized ? ' &nbsp;&#x22C5;&nbsp; &#x2713; optimized' : '') + '</div>' +
+      '</div>' +
+      '<button class="vid-del-btn" onclick="deleteVaultVideo(this)">&#x1F5D1; DELETE</button>';
+
+    wrap.appendChild(row);
+
+    // Load thumbnail async without blocking render
+    if (vid.thumbnail) {
+      window.electronAPI.getThumbnailPath(vid.thumbnail).then(function(url) {
+        if (!url) return;
+        var placeholder = row.querySelector('.vid-thumb-placeholder');
+        if (!placeholder) return;
+        var img = document.createElement('img');
+        img.className = 'vid-thumb';
+        img.src = url;
+        img.onerror = function() { img.style.display='none'; };
+        placeholder.replaceWith(img);
+      }).catch(function(){});
+    }
+  });
+}
+
+async function deleteVaultVideo(btn) {
+  var row     = btn.closest('.vid-item');
+  var vaultId = row.dataset.vaultId;
+  var title   = row.querySelector('.vid-title').textContent;
+
+  if (!confirm('Delete "' + title + '" permanently from vault?\n\nThis cannot be undone.')) return;
+
+  btn.disabled = true;
+  btn.textContent = 'DELETING...';
+
+  try {
+    var result = await window.electronAPI.vaultDelete(vaultId);
+    if (result && result.deleted) {
+      row.style.opacity = '0';
+      row.style.transition = 'opacity 0.3s';
+      setTimeout(function() { row.remove(); }, 300);
+      vaultCache = vaultCache.filter(function(v) { return v.vaultId !== vaultId; });
+      adminToast('"' + title.substring(0,30) + '..." deleted');
+    } else {
+      btn.disabled = false;
+      btn.textContent = '\uD83D\uDDD1 DELETE';
+      adminToast('Delete failed — check console');
+    }
+  } catch(e) {
+    btn.disabled = false;
+    btn.textContent = '\uD83D\uDDD1 DELETE';
+    adminToast('Error: ' + e.message);
+  }
+}
+
+document.addEventListener('keydown', function(e) {
+  if (e.key !== 'Enter') return;
+  if (document.getElementById('adminOverlay').style.display === 'block') return;
+  if (document.getElementById('loginForm').classList.contains('active')) doLogin();
+  else doRegister();
+});
+
+window.addEventListener('load', function() {
+  document.getElementById('loginUser').focus();
+});
+
+// Test automation runner
+(function() {
+  if (!window.electronAPI.isTestRunner()) return;
+  console.log('[Test Runner] Automation active');
+  setTimeout(function() {
+    var userEl = document.getElementById('loginUser');
+    var passEl = document.getElementById('loginPass');
+    if (userEl && passEl && document.getElementById('adminOverlay').style.display !== 'block') {
+      userEl.value = 'LUHARPRO';
+      passEl.value = 'luhar123';
+      console.log('[Test Runner] Logging in...');
+      doLogin();
+    }
+  }, 2000);
+
+  // Monitor dashboard view
+  var dashCheck = setInterval(function() {
+    var overlay = document.getElementById('adminOverlay');
+    if (overlay && overlay.style.display === 'block') {
+      clearInterval(dashCheck);
+      console.log('[Test Runner] Dashboard active, entering app...');
+      setTimeout(function() {
+        window.electronAPI.goHome();
+      }, 2000);
+    }
+  }, 500);
+})();
+</script>
+</body>
+</html>

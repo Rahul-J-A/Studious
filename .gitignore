@@ -1,0 +1,34 @@
+# Dependency directories
+node_modules/
+package-lock.json
+
+# Build and distribution
+dist/
+build/
+
+# Application runtime data & cache
+appdata/
+temp/
+tor-data/
+backups/
+stage/
+*.tmp
+*.log
+
+# Media vaults (Large video & audio assets)
+videos/
+previews/
+thumbnails/
+musics/
+
+# Large binaries exceeding GitHub limits (See README for setup)
+bin/
+
+# Legacy backups
+woring app old/
+working app old/
+
+# Operating System files
+.DS_Store
+Thumbs.db
+desktop.ini
