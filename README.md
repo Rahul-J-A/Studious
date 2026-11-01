@@ -49,6 +49,18 @@
 
 ---
 
+## 📸 Screenshots
+
+| Study Dashboard & Lecture Vault | Research Browser & Stream Sniffer |
+| :---: | :---: |
+| ![Dashboard](assets/screenshots/screenshot-1.png) | ![Browser](assets/screenshots/screenshot-2.png) |
+
+| Lecture Clip Editor & Notes | Media Player & 360° Classroom View |
+| :---: | :---: |
+| ![Editor](assets/screenshots/screenshot-3.png) | ![Player](assets/screenshots/screenshot-4.png) |
+
+---
+
 ## 🛠️ Architecture & Tech Stack
 
 - **Framework**: [Electron](https://www.electronjs.org/) (Multi-window architecture, IPC bridge with context isolation)
@@ -128,3 +140,4 @@ Studious/
 ## 📄 License
 
 This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
+
