@@ -24,6 +24,9 @@
       "index.html",
       "browser.html",
       "login.html",
+      "three.min.js",
+      "icon.png",
+      "icon.ico",
       "package.json"
     ],
     "extraResources": []

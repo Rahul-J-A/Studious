@@ -42,6 +42,16 @@ const defaultBaseDir = fs.existsSync('D:\\Studious')
     : (fs.existsSync('D:\\') ? 'D:\\Studious' : path.join(app.getPath('userData'), 'StudiousData'));
 const baseDataDir = isPackaged ? defaultBaseDir : __dirname;
 
+// Prepend bin directories to PATH for ffmpeg and yt-dlp access
+const binDir = path.join(baseDataDir, 'bin');
+const localBinDir = path.join(__dirname, 'bin');
+const resBinDir = process.resourcesPath ? path.join(process.resourcesPath, 'bin') : null;
+for (const b of [binDir, localBinDir, resBinDir]) {
+    if (b && fs.existsSync(b)) {
+        process.env.PATH = b + path.delimiter + (process.env.PATH || '');
+    }
+}
+
 const videosFolder     = path.join(baseDataDir, 'videos');
 const thumbnailsFolder = path.join(baseDataDir, 'thumbnails');
 const previewsFolder   = path.join(baseDataDir, 'previews');
@@ -355,8 +365,6 @@ ipcMain.handle('check-download-type', async (e, url) => {
             const args = ['--flat-playlist', '--dump-json', '--no-download', '--no-warnings', '--js-runtimes', 'node'];
             if (cookiePath) {
                 args.push('--cookies', cookiePath);
-            } else if (domain.includes('youtube.com') || domain.includes('youtu.be')) {
-                args.push('--cookies-from-browser', 'edge');
             }
             if (activeProxyUrl) { args.push('--proxy', activeProxyUrl); }
             args.push(url);
@@ -2320,7 +2328,12 @@ function findCookieFile(domain) {
     const mapped = getCookieFilename(domain);
     for (const name of [mapped + '.txt', domain.replace(/^www\./, '') + '.txt']) {
         const p = path.join(baseDataDir, 'cookies', name);
-        if (fs.existsSync(p)) return p;
+        if (fs.existsSync(p)) {
+            try {
+                const stat = fs.statSync(p);
+                if (stat.size > 150) return p;
+            } catch {}
+        }
     }
     return null;
 }
@@ -2563,33 +2576,53 @@ async function startDownload(videoUrl, filePath, retryLevel = 0, playlistId = nu
     }
 
     const domain = getHostname(videoUrl);
+    const isYouTube = domain && (domain.includes('youtube.com') || domain.includes('youtu.be'));
+
+    // On retry, clean any stale partial download files so yt-dlp doesn't fail with expired token 403 on resume
+    if (retryLevel > 0) {
+        try {
+            const stageFiles = fs.readdirSync(STAGE_FOLDER);
+            for (const f of stageFiles) {
+                if (f.endsWith('.part') || f.endsWith('.ytdl')) {
+                    fs.unlinkSync(path.join(STAGE_FOLDER, f));
+                }
+            }
+        } catch {}
+    }
+
     const cookiePath = findCookieFile(domain || '');
     const args = [
         '--newline', '--no-playlist', '--merge-output-format', 'mp4',
-        '--referer', videoUrl,
-        '--add-header', `Origin:${new URL(videoUrl).origin}`,
-        '--user-agent', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120 Safari/537.36',
         '--hls-prefer-native',
         '--no-check-certificates', '--geo-bypass',
+        '--retries', '10',
+        '--fragment-retries', '10',
         '--js-runtimes', 'node',
-        '-f', 'bestvideo+bestaudio/best', '-o', filePath, videoUrl
+        '-f', 'bestvideo+bestaudio/best', '-o', filePath
     ];
 
+    if (!isYouTube) {
+        args.push('--referer', videoUrl);
+        try { args.push('--add-header', `Origin:${new URL(videoUrl).origin}`); } catch {}
+        args.push('--user-agent', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120 Safari/537.36');
+    }
+
     // Cookie strategy: manual file > Electron session export > no cookies
-    // Never use --cookies-from-browser (DPAPI decryption fails on modern Chrome/Edge)
     let tmpCookieFile = null;
     if (cookiePath) {
-        args.unshift('--cookies', cookiePath);
-    } else {
-        // Export cookies from Electron's own browsing session
+        args.push('--cookies', cookiePath);
+    } else if (!isYouTube) {
         tmpCookieFile = await exportSessionCookies(domain || '');
         if (tmpCookieFile) {
-            args.unshift('--cookies', tmpCookieFile);
+            args.push('--cookies', tmpCookieFile);
         }
     }
+
     if (activeProxyUrl) {
         args.push('--proxy', activeProxyUrl);
     }
+
+    args.push(videoUrl);
 
     const ytDlp = spawn('yt-dlp', args);
     runningDownloads[downloadId] = {
